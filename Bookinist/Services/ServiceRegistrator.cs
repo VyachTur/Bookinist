@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bookinist.ViewModels
+namespace Bookinist.Services
 {
-    internal class ViewModelLocator
+    static class ServiceRegistrator
     {
-        public MainWindowViewModel MainWindowVM => App.Services.GetRequiredService<MainWindowViewModel>();
+        public static IServiceCollection AddServices(this IServiceCollection services) => services
+        ;
     }
 }

@@ -5,12 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Bookinist.ViewModels"
         xmlns:local="clr-namespace:Bookinist"
+        DataContext="{Binding MainWindowVM, Source={StaticResource LocatorVM}}"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="450" Width="800">
-    <Window.DataContext>
-        <vm:MainWindowViewModel />
-    </Window.DataContext>
-    
+
     <Grid>
 
     </Grid>
