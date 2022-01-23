@@ -2,6 +2,7 @@
 using Bookinist.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Bookinist.Data;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,11 +26,19 @@ namespace Bookinist
 
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
             .AddServices()
-            .AddViewModels();
+            .AddViewModels()
+            .AddDatabase(host.Configuration.GetSection("Database"))
+            ;
 
         protected override async void OnStartup(StartupEventArgs e)
         {
             var host = Host;
+
+            using(var scope = Services.CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<DbInitializer>().InitializeAsync().Wait();
+            }
+
             base.OnStartup(e);
             await host.StartAsync();
         }
